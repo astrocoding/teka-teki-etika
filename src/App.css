@@ -147,6 +147,43 @@ body {
   transition: 0.3s;
 }
 
+.popup {
+  background: #f3f8ff;
+  border: 2px solid #c9e4ff;
+  border-radius: 16px;
+  padding: 24px 32px;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: popUpFade 0.8s ease-out;
+  position: relative;
+}
+
+.popup h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 12px;
+}
+
+.popup p {
+  font-size: 18px;
+  color: #333;
+  margin-top: 0;
+}
+
+@keyframes popUpFade {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 480px) {
   .fill-container {
     padding: 16px;

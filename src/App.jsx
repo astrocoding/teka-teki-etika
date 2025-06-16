@@ -1,4 +1,3 @@
-// TTSFillGame.jsx
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
@@ -52,7 +51,7 @@ const questions = [
     hint: "Hak individu untuk menjaga dan melindungi informasi pribadinya.",
     answer: "PRIVACY",
     clue: ["P", null, null, null, null, null, null]
-  },
+  }
 ];
 
 function TTSFillGame() {
@@ -61,6 +60,7 @@ function TTSFillGame() {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [boxStatus, setBoxStatus] = useState([]);
+  const [finished, setFinished] = useState(false);
   const inputRefs = useRef([]);
 
   useEffect(() => {
@@ -121,6 +121,8 @@ function TTSFillGame() {
         setFeedback("");
         if (current + 1 < questions.length) {
           setCurrent(current + 1);
+        } else {
+          setFinished(true);
         }
       }, 1200);
     } else {
@@ -132,25 +134,34 @@ function TTSFillGame() {
   return (
     <div className={`fill-container themed-bg ${feedback}`}>
       <h2>🧠 Teka-Teki Etika Profesi</h2>
-      <div className="question-row">
-        <div className="hint">{current + 1}. {questions[current].hint}</div>
-        <div className="input-row">
-          {questions[current].answer.split("").map((_, i) => (
-            <input
-              key={i}
-              ref={inputRefs.current[current]?.[i]}
-              maxLength={1}
-              readOnly={questions[current].clue[i] !== null}
-              className={`cell ${boxStatus[i] || ""}`}
-              value={inputs[current][i] || ""}
-              onChange={(e) => handleChange(i, e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e, i)}
-            />
-          ))}
+      {finished ? (
+        <div className="popup">
+          <h3>🎉 Kamu telah menyelesaikan game!</h3>
+          <p>Skormu: {score} / {questions.length}</p>
         </div>
-      </div>
-      <button onClick={handleCheck} className="check-button">Kirim Jawaban</button>
-      <div className="scoreboard">🔥 Skor Saat Ini: {score} / {questions.length}</div>
+      ) : (
+        <>
+          <div className="question-row">
+            <div className="hint">{current + 1}. {questions[current].hint}</div>
+            <div className="input-row">
+              {questions[current].answer.split("").map((_, i) => (
+                <input
+                  key={i}
+                  ref={inputRefs.current[current]?.[i]}
+                  maxLength={1}
+                  readOnly={questions[current].clue[i] !== null}
+                  className={`cell ${boxStatus[i] || ""}`}
+                  value={inputs[current][i] || ""}
+                  onChange={(e) => handleChange(i, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(e, i)}
+                />
+              ))}
+            </div>
+          </div>
+          <button onClick={handleCheck} className="check-button">Kirim Jawaban</button>
+          <div className="scoreboard">🔥 Skor Saat Ini: {score} / {questions.length}</div>
+        </>
+      )}
     </div>
   );
 }
