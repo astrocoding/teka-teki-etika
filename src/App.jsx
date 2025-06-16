@@ -1,7 +1,7 @@
-// TTSFillGame.jsx
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import funnyAudio from "./assets/funny.wav";
+import logoRosma from "./assets/rosma.png";
 
 const questions = [
   {
@@ -152,6 +152,7 @@ function TTSFillGame() {
 
   return (
     <div className={`fill-container themed-bg ${feedback}`}>
+      <img src={logoRosma} alt="Logo Rosma" className="logo-rosma" />
       <h2>🧠 Teka-Teki Etika Profesi</h2>
       {finished ? (
         <div className="popup">

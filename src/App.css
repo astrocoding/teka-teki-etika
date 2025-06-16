@@ -38,6 +38,12 @@ body {
 }
 
 /* Judul dan soal */
+.logo-rosma {
+  display: block;
+  max-width: 120px;
+  margin: 0 auto 12px;
+}
+
 .fill-container h2 {
   text-align: center;
   font-size: 22px;
