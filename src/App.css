@@ -1,7 +1,7 @@
 /* Background dan container */
 body {
   background: linear-gradient(to bottom, #eef6ff, #ffffff);
-  background-image: url('src/assets/bg.jpg');
+  background-image: url('/bg.jpg');
   background-repeat: repeat;
   background-position: bottom;
   background-size: contain;
