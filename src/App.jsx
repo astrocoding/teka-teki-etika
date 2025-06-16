@@ -1,5 +1,7 @@
+// TTSFillGame.jsx
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
+import funnyAudio from "./assets/funny.wav";
 
 const questions = [
   {
@@ -61,7 +63,24 @@ function TTSFillGame() {
   const [feedback, setFeedback] = useState("");
   const [boxStatus, setBoxStatus] = useState([]);
   const [finished, setFinished] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const audioRef = useRef(new Audio(funnyAudio));
   const inputRefs = useRef([]);
+
+  useEffect(() => {
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.2;
+    audioRef.current.play();
+  }, []);
+
+  const toggleAudio = () => {
+    if (playing) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setPlaying(!playing);
+  };
 
   useEffect(() => {
     inputRefs.current = questions.map(q =>
@@ -162,6 +181,9 @@ function TTSFillGame() {
           <div className="scoreboard">🔥 Skor Saat Ini: {score} / {questions.length}</div>
         </>
       )}
+      <button className="audio-toggle" onClick={toggleAudio}>
+        {playing ? "🔊" : "🔈"}
+      </button>
     </div>
   );
 }
